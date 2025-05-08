@@ -1,0 +1,218 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Clients Management API",
+        "description": "API для управления клиентами",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/clients": {
+            "get": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Получить список всех клиентов",
+                "operationId": "d00d20521584ab5da83e088abb7aded2",
+                "responses": {
+                    "200": {
+                        "description": "Успешно получен список клиентов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Client"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Создать нового клиента",
+                "operationId": "f1e86e5b79fedfa6593067977292b13b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Иван Иванов"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "ivan@example.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "1234567890"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Клиент успешно создан",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Client"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибка валидации"
+                    }
+                }
+            }
+        },
+        "/api/clients/{id}": {
+            "put": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Обновить информацию о клиенте",
+                "operationId": "7d0a5ae9e306858d30e04fc50265d80c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Иван Иванов"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "ivan@example.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "1234567890"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Информация о клиенте успешно обновлена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Client"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Клиент не найден"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Удалить клиента",
+                "operationId": "c929f14f421a80a896c6fe116ffdc317",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Клиент успешно удален"
+                    },
+                    "404": {
+                        "description": "Клиент не найден"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Client": {
+                "title": "Client",
+                "required": [
+                    "name",
+                    "email"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Иван Иванов"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "ivan@example.com"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "1234567890"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Clients",
+            "description": "Clients"
+        }
+    ]
+}
