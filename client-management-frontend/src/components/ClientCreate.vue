@@ -16,13 +16,12 @@
       </div>
       <button type="submit">Create</button>
     </form>
-
-    <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import { useToast } from 'vue-toastification';
 
 export default {
   name: 'ClientCreate',
@@ -32,17 +31,21 @@ export default {
         name: '',
         email: '',
         phone: ''
-      },
-      errorMessage: ''
+      }
     };
+  },
+  setup() {
+    const toast = useToast(); // инициализация тостов
+    return { toast };
   },
   methods: {
     async createClient() {
       try {
         await axios.post('http://localhost:8000/api/clients', this.client);
-        this.$router.push('/clients'); // После создания переходим обратно к списку
+        this.toast.success('Клиент успешно создан ✅'); // тост об успехе
+        this.$router.push('/clients');
       } catch (error) {
-        this.errorMessage = 'Ошибка при создании клиента';
+        this.toast.error('Ошибка при создании клиента ❌'); // тост об ошибке
       }
     }
   }
@@ -68,7 +71,7 @@ input {
 }
 button {
   padding: 10px 15px;
-  background-color: #4CAF50;
+  background-color: #42b983;
   color: white;
   border: none;
   cursor: pointer;
