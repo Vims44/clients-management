@@ -123,4 +123,16 @@ class ClientController extends Controller
 
         return response()->json(['message' => 'Client deleted successfully']);
     }
+
+    // Получение одного клиента по ID
+    public function show($id)
+    {
+        $client = Client::find($id);
+
+        if (!$client) {
+        return response()->json(['message' => 'Client not found'], 404);
+    }
+
+    return response()->json($client);
+    }
 }

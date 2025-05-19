@@ -17,3 +17,5 @@ Route::get('/clients', [ClientController::class, 'index']); // Список кл
 Route::post('/clients', [ClientController::class, 'store']); // Создание клиента
 Route::put('/clients/{id}', [ClientController::class, 'update']); // Обновление клиента
 Route::delete('/clients/{id}', [ClientController::class, 'destroy']); // Удаление клиента
+Route::get('/clients/{id}', [ClientController::class, 'show']); // Получение одного клиента
+

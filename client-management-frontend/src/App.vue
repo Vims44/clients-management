@@ -1,17 +1,12 @@
 <template>
   <div id="app">
-    <ClientsList />
+    <router-view /> <!-- Это место для отображения компонента в зависимости от маршрута -->
   </div>
 </template>
 
 <script>
-import ClientsList from './components/ClientsList.vue';
-
 export default {
-  name: 'App',
-  components: {
-    ClientsList
-  }
+  name: 'App'
 };
 </script>
 
